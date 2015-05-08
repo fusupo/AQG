@@ -16,24 +16,24 @@ var aqGym = aqGym || {};
 aqGym.lesson1 = aqGym.lesson1 || {};
 
 // naively
-aqGym.lesson1.containsAtSymbol = function(email_str){
+aqGym.lesson1.containsAtSymbol = function(email_str) {
     var containsAt;
-    var split_arr = email_str.split("@");
-    if(split_arr[0] === email_str){
+    var idexOfAtSymbol = email_str.indexOf("@");
+    if (idexOfAtSymbol === -1) {
         containsAt = false;
-    }else{
+    } else {
         containsAt = true;
     }
     return containsAt;
 };
 
 // likewise we can do the same for the period
-aqGym.lesson1.containsPeriodSymbol = function(email_str){
+aqGym.lesson1.containsPeriodSymbol = function(email_str) {
     var containsPeriod;
-    var split_arr = email_str.split(".");
-    if(split_arr[0] === email_str){
+    var indexOfPeriod = email_str.indexOf(".");
+    if (indexOfPeriod === -1) {
         containsPeriod = false;
-    }else{
+    } else {
         containsPeriod = true;
     }
 
@@ -41,12 +41,12 @@ aqGym.lesson1.containsPeriodSymbol = function(email_str){
 };
 
 // we can keep it DRY
-aqGym.lesson1.containsSymbol = function(email_str, symbol){
+aqGym.lesson1.containsSymbol = function(email_str, symbol) {
     var containsSym;
-    var split_arr = email_str.split(symbol);
-    if(split_arr[0] === email_str){
+    var indexOfSymbol = email_str.indexOf(symbol);
+    if (indexOfSymbol === -1) {
         containsSym = false;
-    }else{
+    } else {
         containsSym = true;
     }
 
@@ -54,11 +54,11 @@ aqGym.lesson1.containsSymbol = function(email_str, symbol){
 };
 
 // resulting in our naive validation func
-aqGym.lesson1.validateEmail = function(email_str){
+aqGym.lesson1.validateEmail = function(email_str) {
     var isValid;
-    if(this.containsSymbol(email_str, "@") && this.containsSymbol(email_str, ".")){
-        isValid = true;  
-    }else{
+    if (this.containsSymbol(email_str, "@") && this.containsSymbol(email_str, ".")) {
+        isValid = true;
+    } else {
         isValid = false;
     }
 
@@ -70,9 +70,9 @@ console.log(email2 + " is valid email? " + aqGym.lesson1.validateEmail(email2));
 console.log(email3 + " is valid email? " + aqGym.lesson1.validateEmail(email3));
 
 // but in reality we should probably want to use regular expressions
-aqGym.lesson1.validateEmailToo = function(email_str){
+aqGym.lesson1.validateEmailToo = function(email_str) {
     var reg_exp = /@[A-Za-z]+[\.]/; //still naive, but less so than the previous method
-    return(reg_exp.test(email_str));
+    return (reg_exp.test(email_str));
 };
 
 console.log(email1 + " is valid email? " + aqGym.lesson1.validateEmailToo(email1));
